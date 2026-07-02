@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itaja Odese</title>
+    <!--Faça seu comentário-->
+    <!--LINK ADICIONAR O FAVICON-->
+    <link rel="shorcut icon" href="../Imagens/icones/favicon.ico" type="image/x-icon">
+    <!--LINK PARA O ARQUIVO-->
+
+    <link rel="stylesheet" href="css/style_estrutura_paginas.css">
+</head>
+<body>
+    <main id="geral">
+        <headerid id="cabecalho">
+
+            <div id="logo">
+                <a href="index.html"></a>
+                 <img src="Imagens/icones/logo.png" alt="">
+            </div>
+
+            <nav id="menu">
+                <ul>
+                    <li><a href="index.html class="lnk_menu">Home</a></li>
+                    <li><a href="paginas/cadastro.html class="lnk_menu">Cadastro</a></li>
+                    <li><a href="paginas/sobre.html class="lnk_menu">Sobre</a></li>
+                </ul>
+            </nav>
+
+            <div id="div-icones">
+                <ul>
+                    <li><a href="/paginas/login.html" class="lnk_icon"><img src="Imagens/icones/login.png" alt=""></a></li>
+                    >
+                    <li><a href="/paginas/carrinho.html" class="lnk_icon"><img src="Imagens/icones/carrinho.png" alt=""></a></li>
+                </ul>
+
+            </div>
+        </header>
+        <section id="pesquisa">
+               <input type="text" name="pesquisa" id="pesquisa" placeholder="Digite seu produto">
+        </section>
+        <section id="form">
+            <h3>Cadastro</h3>
+    
+            <form id="form-pessoa">
+                <label for="nome">Nome</label>
+                <input type="text" name="nome" id="nome" class="input01" required maxlength="60" placeholder="Digite Seu nome">
+    
+                <label for="cpf">CPF</label>
+                <input type="text" name="cpf" id="cpf" class="input02" required maxlength="14" placeholder="Digite Seu CPF">
+    
+                <label for="data-nascimento">Data Nascimento</label>
+                <input type="date" name="data-nascimento" id="data-nascimento" class="input01" required>
+    
+                <label for="sexo">Sexo</label>
+                <input type="radio" name="sexo" id="sexoM" class="inputOP" value="M"> Masculino
+                <input type="radio" name="sexo" id="sexoF" class="inputOP" value="F"> Feminino
+                <input type="radio" name="sexo" id="sexoN" class="inputOP" value="N"> Não Declarar
+    
+                <label for="cep">CEP</label>
+                <input type="text" name="cep" id="cep" class="input02" required maxlength="9" placeholder="Digite seu CEP">
+    
+                <div id="div-dados-endereco" class="oculto">
+                    <label for="logradouro">Logradouro</label>
+                    <input type="text" name="logradouro" id="logradouro"  class="input01">
+    
+                    <label for="num-residencia">Numero</label>
+                    <input type="text" name="num-residencia" id="num-residencia"  class="input01" maxlength="10" placeholder="Digite o número da redidencia">
+    
+                    <label for="complemente-end">Complemento</label>
+                    <input type="text" name="complemente-end" id="complemente-end"  class="input01">
+    
+                    <label for="bairro">Bairro</label>
+                    <input type="text" name="bairro" id="bairro" class="input01">
+    
+                    <label for="localidade">Localidade</label>
+                    <input type="text" name="localidade" id="localidade"  class="input01">
+    
+                    <label for="uf">Unidade Federativa</label>
+                    <input type="text" name="uf" id="uf"  class="input01">
+                </div>
+    
+                <label for="senha">Senha</label>
+                <input type="password" name="senha" id="senha" class="input02" required maxlength="6" placeholder="Informe sua senha">
+    
+                <button type="submit" id="btn-add">Cadastrar</button>
+                <button type="reset" id="btn-limpar">Limpar</button>
+            </form>
+           </section>
+
+            
+                <footer>
+                    <div id="dadosloja">
+                        <h2>Rua Terra Dura, 88 - Siqueira Campos</h2>
+                        <h1>Aracaju - Sergipe</h1>
+                         <div id="icones_social">
+                            <ul>
+                                <li><a href="https://www.instagram.com/seu_usuario"><img src="Imagens/icones/instagram.png" alt=""></a></li>
+                                <li><a href="https://www.facebook.com/seu_usuario"><img src="Imagens/icones/instagram.png" alt=""></a></li>
+                            </ul>
+
+                            <div id="div-cartoes">
+                                <img src="Imagens/icones/hipercard.png" alt="Hipercard">
+                                <img src="Imagens/icones/visa.png" alt="Visa">
+                                <img src="Imagens/icones/master_card.png" alt="MasterCard">
+
+
+
+                            </div>
+                         </div>
+                    </div>
+                </footer>
+            </section>
+        </section>
+    </main>
+</body>
+</html>
