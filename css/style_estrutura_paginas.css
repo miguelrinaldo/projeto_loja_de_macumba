@@ -1,29 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-
+/*ATRIBUINDO EM TODOS OS ELEMENTOS */
 *{
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
     font-family: roboto;
 }
-
+/*CRIANDO VARIAVEIS*/
 :root{
   --cor-principal: #eec71b;
   --cor-botao01: #049d09;
   --cor_lnk_menu: ;
 }
-
+/*CONFIGURANDO A TAG main*/
 #geral{
    margin: 20px;
    padding: 20px;
 
 }
-
-#geral{
-    margin: 20px;
-    padding: ;
-}
-
+/*CONFIGURANDO O CABEÇALHO DA PAGINA*/
 #cabecalho{
     width: 100%;
     height: 200px;
