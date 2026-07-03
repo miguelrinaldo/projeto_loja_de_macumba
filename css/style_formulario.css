@@ -33,3 +33,23 @@ label{
 .input{
     width: 400px;
 }
+
+
+#div-btns{
+    height: 60px;
+    margin: 40px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#div-btns button{
+    width: 200px;
+    height: 40px;
+    margin-left: 20px;
+    background-color: var(--cor_suave);
+    border: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 0.8em;
+    letter-spacing: 5px;
+}
