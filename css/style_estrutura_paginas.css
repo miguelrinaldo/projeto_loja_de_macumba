@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Playfair+Display:wght@600;700&display=swap');
 
 /*ATRIBUINDO EM TODOS OS ELEMENTOS*/
@@ -5,15 +6,15 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto" ;
 }
 
 /*VARIÁVEIS DE COR - paleta inspirada em terracota, dourado e preto*/
 :root{
     --cor_fundo: rgb(255, 255, 255);
     --cor_escura: rgb(30, 24, 20);
-    --cor_terracota: rgb(163, 74, 42);
-    --cor_terracota_escura: rgb(129, 56, 30);
+    --cor_branco: rgb(240, 230, 226);
+    --cor_terracota_escura: rgb(240, 234, 233);
     --cor_dourada: rgb(196, 154, 68);
     --cor_texto: rgb(45, 38, 32);
     --cor_texto_claro: rgb(230, 224, 214);
