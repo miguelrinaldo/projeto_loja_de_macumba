@@ -19,9 +19,26 @@ import { produtos} from "./produtos.js";
        const h2Titulo = document.createElement('h2')
        h2Titulo.innerHTML = elem.descricao_produto
 
-       const divValor = document.createElement('div')
-       divValor.setAttribute('class', 'valor_card')
-       divValor.innerHTML`R$ ${parseFloat(elem.valor_unitario).toFixed()}`
+       const h3Valor = document.createElement('h3')
+       h3ValorValor.setAttribute('class', 'valor_card')
+       h3ValorValor.innerHTML`R$ ${parseFloat(elem.valor_unitario).toFixed(2).replace('.', ',')}`
+
+       const btnCard = document.createElement('button')
+       btnCard.setAttribute('class', 'btn_card')
+       btnCard.innerHTML = 'Adicionar'
+
+       divCard.appendChild(imgProduto)
+       divCard.appendChild(h2Titulo)
+       divCard.appendChild(h3Valor)
+       divCard.appendChild(btnCard)
+       section_cards.appendChild(divCard)
+       
+       
+
+       
+
     })        
  }
+
+ listaProdutos()
 
