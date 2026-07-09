@@ -8,9 +8,6 @@ const section_cards = document.querySelector('#cards')
 const listarProdutos = () => {
     section_cards.innerHTML = ''
 
-
-
-
 }
 
 listarProdutos()
