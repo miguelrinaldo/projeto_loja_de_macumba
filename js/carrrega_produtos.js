@@ -40,14 +40,16 @@ import { produtos} from "./produtos.js";
 
 //FILTRANDO AS SEÇÕES COM A COLEÇÃO map
  const listarSecoes = () => {
+   //PERCORRENDO O ARRAY PRODUTOS E FILTRANDO AS SEÇÕES
    const secoesFiltrada = new Map()
 
    produtos.forEach((elem, i)=>{
+      //CRIANDO A CHAVE O VALOR DA COLEÇÃO 
        secoesFiltrada.set(elem.id_secao, elem)
    })
-
+     //CONVERTENDO O MAP EM ARRAY
       const secoesMenu = Array.from(secoesFiltrada.values())
-
+     //RETORNADO O ARRAY CONVERTIDO
       return secoesMenu
  
  }
@@ -56,21 +58,24 @@ import { produtos} from "./produtos.js";
  const montarSecoes = ()=>{
     //PEGANDO O ELEMENTO DO DOM
     const ulMenu = document.querySelector('#menu-secoes')
+    //LIMPANDO O ELEMENTO ulMenu
     ulMenu.innerHTML = ''
-
+    //PERCORRENDO O ARRAY DA SEÇÕES FILTRADA
     listarSecoes().forEach((elem, i) =>{
+      //CRIANDO O ELEMENTO li
       const liSecao = document.createElement('li')
-
+      //CRIANDO O ELEMENTO a 
       const aSecao = document.createElement('a')
       aSecao.setAttribute('class', 'lnk-secao')
       aSecao.innerHTML = elem.secoesFiltrada
+      //CAPTURANDO O CLICK DO LINKD
       aSecao.addEventListener('click',()=>{
-         //PARA TESTE
+      //PARA TESTE
          console.log(elem.id_secao)
       })
-
+      //ADICIONANDO O ELEMENTO FILHO a NO ELEMENTO li
       ulMenu.appendChild(aSecao)
-
+      //ADICIONANDO O ELEMENTO FILHO li NO ELEMENTO DO DOM ul
       ulMenu.appendChild(liSecao)
     })
  }
