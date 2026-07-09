@@ -1,5 +1,5 @@
 //IMPORTANDO O ARRAY DOS PRODUTOS
-import { produtos } from "./produtos.js";
+import { produtos } from "../produtos.js";
 
 //PEGANDO ELEMENTO DO DOM
 const section_cards = document.querySelector('#cards')
