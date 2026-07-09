@@ -82,5 +82,11 @@ import { produtos} from "./produtos.js";
 
  montarSecoes()
 
+ //FILTRANDO PRODUTOS
+
+const produtosFlitrados = (idSecao) =>{
+   return produtos.filter(elem => elem.id_secao === idSecao)
+}
+
 
 
