@@ -33,12 +33,49 @@ import { produtos} from "./produtos.js";
        divCard.appendChild(btnCard)
        section_cards.appendChild(divCard)
        
-       
-
-       
-
     })        
  }
 
  listaProdutos()
+
+//FILTRANDO AS SEÇÕES COM A COLEÇÃO map
+ const listarSecoes = () => {
+   const secoesFiltrada = new Map()
+
+   produtos.forEach((elem, i)=>{
+       secoesFiltrada.set(elem.id_secao, elem)
+   })
+
+      const secoesMenu = Array.from(secoesFiltrada.values())
+
+      return secoesMenu
+ 
+ }
+
+ //MONTANDO OS LINKS SEÇÕES 
+ const montarSecoes = ()=>{
+    //PEGANDO O ELEMENTO DO DOM
+    const ulMenu = document.querySelector('#menu-secoes')
+    ulMenu.innerHTML = ''
+
+    listarSecoes().forEach((elem, i) =>{
+      const liSecao = document.createElement('li')
+
+      const aSecao = document.createElement('a')
+      aSecao.setAttribute('class', 'lnk-secao')
+      aSecao.innerHTML = elem.secoesFiltrada
+      aSecao.addEventListener('click',()=>{
+         //PARA TESTE
+         console.log(elem.id_secao)
+      })
+
+      ulMenu.appendChild(aSecao)
+
+      ulMenu.appendChild(liSecao)
+    })
+ }
+
+ montarSecoes()
+
+
 
