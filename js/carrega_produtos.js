@@ -19,9 +19,14 @@ const carregaProduto = (id_secao) => {
 
 //FUNÇÃO PARA CARREGAR OS PRODUTOS
 const listarProdutos = () => {
-    return produtos
+    section_cards.innerHTML = ''
+
+
+
+
 }
 
+listarProdutos()
 
 //FILTRANDO AS SEÇÕES COM A COLEÇÃO map
 const listarSecoes = () => {
@@ -110,30 +115,6 @@ const montandoCards = (objProdutos) => {
         divCard.appendChild(btnCard)
 
         section_cards.appendChild(divCard)
+
     })
 }
-
-//INICIALIZANDO A PÁGINA
-montarSecoes()
-montandoCards(produtos)
-
-btnCard.addEventListener('click', () => {
-    // PEGA O CARRINHO QUE JÁ ESTÁ SALVO OU CRIA UM VAZIO
-    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || []
-
-    // VERIFICA SE O PRODUTO JÁ ESTÁ NO CARRINHO
-    const produtoExistente = carrinho.find(item => item.id_produto === elem.id_produto)
-
-    if (produtoExistente) {
-        // SE JÁ EXISTE, AUMENTA A QUANTIDADE
-        produtoExistente.quantidade += 1
-    } else {
-        // SE NÃO EXISTE, ADICIONA COM QUANTIDADE 1
-        carrinho.push({ ...elem, quantidade: 1 })
-    }
-
-    // SALVA O CARRINHO NO NAVEGADOR
-    localStorage.setItem('carrinho', JSON.stringify(carrinho))
-
-    alert(`${elem.descricao_produto} adicionado ao carrinho!`)
-})
