@@ -12,16 +12,16 @@
 /*VARIÁVEIS DE COR - paleta inspirada em terracota, dourado e preto*/
 :root{
     --cor_fundo: rgb(255, 255, 255);
-    --cor_escura: rgb(30, 24, 20);
-    --cor_branco: rgb(240, 230, 226);
-    --cor_terracota_escura: rgb(240, 234, 233);
-    --cor_dourada: rgb(196, 154, 68);
-    --cor_texto: rgb(45, 38, 32);
-    --cor_texto_claro: rgb(230, 224, 214);
+    --cor_escura: rgb(255, 255, 255);
     --cor_branco: rgb(255, 255, 255);
-    --cor_borda: rgb(222, 210, 190);
+    --cor_terracota_escura: rgb(240, 234, 233);
+    --cor_dourada: rgb(0, 0, 0);
+    --cor_texto: rgb(253, 251, 250);
+    --cor_texto_claro: rgb(0, 0, 0);
+    --cor_branco: rgb(0, 0, 0);
+    --cor_borda: rgb(3, 3, 3);
 
-    --sombra_suave: 0 2px 10px rgba(0, 0, 0, 0.08);
+    --sombra_suave: 0 2px 10px rgba(230, 219, 219, 0.08);
     --transicao: 0.25s ease;
 }
 
