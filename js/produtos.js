@@ -161,4 +161,5 @@ const produtos = [
     }
   ];
   
-  module.exports = produtos;
+  
+  export{produtos}

@@ -10,13 +10,15 @@
     <!--LINK PARA O ARQUIVO-->
 
     <link rel="stylesheet" href="css/style_estrutura_paginas.css">
+    <link rel="stylesheet" href="css/carrinho.css">
 
     <!--LINK PARA O ARQUIVO carrega_produtos.js-->
-    <script src="/js/carrrega_produtos.js" type="module" defer></script>
+    <script src="js/carrinho.js" type="module" defer></script>
+    <script src="js/carrrega_produtos.js" type="module" defer></script>
 </head>
 <body>
     <main id="geral">
-        <headerid id="cabecalho">
+        <header id="cabecalho">
 
             <div id="logo">
                 <a href="index.html"></a>
@@ -33,9 +35,9 @@
 
             <div id="div-icones">
                 <ul>
-                    <li><a href="/paginas/login.html" class="lnk_icon"><img src="Imagens/icones/login.png" alt=""></a></li>
+                    <li><a href="paginas/login.html" class="lnk_icon"><img src="Imagens/icones/login.png" alt=""></a></li>
                     >
-                    <li><a href="/paginas/carrinho.html" class="lnk_icon"><img src="Imagens/icones/carrinho.png" alt=""></a></li>
+                    <li><a href="paginas/carrinho.html" class="lnk_icon"><img src="Imagens/icones/carrinho.png" alt=""></a></li>
                 </ul>
 
             </div>
@@ -53,7 +55,7 @@
         <section id="pesquisa">
                <input type="text" name="pesquisa" id="pesquisa" placeholder="Digite seu produto">
         </section>
-        <section>
+        <section id="cards">
             <div class="card">
                 <img src="Imagens/agata.jpg" alt="agata">
 
@@ -119,6 +121,7 @@
                 <button class="btn-card">Adicionar</button>
 
             </div>
+            </section>
 
             <section>
                 <footer>

@@ -4,70 +4,69 @@ import { produtos } from "./produtos.js";
 //PEGANDO ELEMENTO DO DOM
 const section_cards = document.querySelector('#cards')
 
-//FUNÇÃO PARA CARREGAR OS PRODUTOS
-const listarProdutos = () => {
-    section_cards.innerHTML = ''
+//CARREGA 
+const carregaProduto = (id_secao) => {
+    //AO CHAMAR A FUNÇÃO carregaProduto() DEVE PASSAR O PARÂMETRO. 0(ZERO) CHAMA A FUNÇÃO listarProdutos(), QUALQUER OUTRO VALOR CHAMA A FUNLÇAO produtosFiltrados(id_secao)
+    if (id_secao === 0) {
+        montandoCards(listarProdutos())
+    } else {
+        montandoCards(produtosFiltrados(id_secao))
+    }
 
-
-
-
+    //QUALQUER FUNÇÃO CHAMADA SEMPRE CHAMA A FUNÇÃO montarSecoes()
+    montarSecoes()
 }
 
-listarProdutos()
+//FUNÇÃO PARA CARREGAR OS PRODUTOS
+const listarProdutos = () => {
+    return produtos
+}
+
 
 //FILTRANDO AS SEÇÕES COM A COLEÇÃO map
 const listarSecoes = () => {
-    //CRIANDO A COLEÇÃO MAP
     const secoesFiltrada = new Map()
 
-    //PECORRENDO O ARRAY PRODUTOS E FILTRANDO AS SEÇÕES
     produtos.forEach((elem, i) => {
-        //CRIANDO A CHAVE E O VALOR DA COLEÇÃO MAP A PARTIR DO ID DA SEÇÃO DA LISTA DE PRODUTOS
         secoesFiltrada.set(elem.id_secao, elem)
     })
 
-    //CONVERTENDO O MAP EM ARRAY
     const secoesMenu = Array.from(secoesFiltrada.values())
-
-    //RETORNADO O ARRAY CONVERTIDO
     return secoesMenu
-
 }
 
 //MONTANDO OS LINKS SEÇÕES
 const montarSecoes = () => {
-    //PEGANDO O ELEMENTO DO DOM
     const ulMenu = document.querySelector('#menu-secoes')
-    //LIMPANDO O ELEMENTO ulMenu
     ulMenu.innerHTML = ''
 
-    //PERCORRENDO O ARRAY DAS SEÇÕES FILTRADA
+    const liTodos = document.createElement('li')
+    const aTodos = document.createElement('a')
+    aTodos.setAttribute('href', '#')
+    aTodos.setAttribute('class', 'lnk-secao')
+    aTodos.innerHTML = 'Todos'
+    aTodos.addEventListener('click', () => {
+        montandoCards(produtos)
+    })
+    liTodos.appendChild(aTodos)
+    ulMenu.appendChild(liTodos)
+
     listarSecoes().forEach((elem, i) => {
-        //CRIANDO O ELEMENTO li
         const liSecao = document.createElement('li')
 
-        //CRIANDO O ELEMENTO a
         const aSecao = document.createElement('a')
         aSecao.setAttribute('href', '#')
         aSecao.setAttribute('class', 'lnk-secao')
         aSecao.innerHTML = elem.nome_secao
 
-        //CAPTURANDO O CLICK DOS LINKS
         aSecao.addEventListener('click', () => {
-            //CHAMANDO A FUNÇÃO PRODUTOS FILTRADOS
             montandoCards(produtosFiltrados(elem.id_secao))
         })
 
-        //ADICIONANDO O ELEMENTO FILHO a NO ELEMENTO li
         liSecao.appendChild(aSecao)
-
-        //ADICIONANDO O ELEMENTO FILHO li NO ELEMENTO DO DOM ul
         ulMenu.appendChild(liSecao)
     })
-
 }
-
-montarSecoes()
 
 //FILTRANDO PRODUTOS 
 const produtosFiltrados = (idSecao) => {
@@ -88,6 +87,7 @@ const montandoCards = (objProdutos) => {
         imgProduto.setAttribute('class', 'img_card')
 
         const h2Titulo = document.createElement('h2')
+        h2Titulo.setAttribute('class', 'tito_card')
         h2Titulo.innerHTML = elem.descricao_produto
 
         const h3Valor = document.createElement('h3')
@@ -95,123 +95,45 @@ const montandoCards = (objProdutos) => {
         h3Valor.innerHTML = `R$ ${parseFloat(elem.valor_unitario).toFixed(2).replace('.', ',')}`
 
         const btnCard = document.createElement('button')
-        btnCard.setAttribute('class', 'btn_card')
+        btnCard.setAttribute('class', 'btn-card')
         btnCard.innerHTML = 'Adicionar'
 
-        divCard.appendChild(imgProduto)
-        divCard.appendChild(h2Titulo)
-        divCard.appendChild(h3Valor)
-        divCard.appendChild(btnCard)
-
-        section_cards.appendChild(divCard)
-
-    })
-}//IMPORTANDO O ARRAY DOS PRODUTOS
-import { produtos } from "./produtos.js";
-
-//PEGANDO ELEMENTO DO DOM
-const section_cards = document.querySelector('#cards')
-
-//FUNÇÃO PARA CARREGAR OS PRODUTOS
-const listarProdutos = () => {
-    section_cards.innerHTML = ''
-
-
-
-
-}
-
-listarProdutos()
-
-//FILTRANDO AS SEÇÕES COM A COLEÇÃO map
-const listarSecoes = () => {
-    //CRIANDO A COLEÇÃO MAP
-    const secoesFiltrada = new Map()
-
-    //PECORRENDO O ARRAY PRODUTOS E FILTRANDO AS SEÇÕES
-    produtos.forEach((elem, i) => {
-        //CRIANDO A CHAVE E O VALOR DA COLEÇÃO MAP A PARTIR DO ID DA SEÇÃO DA LISTA DE PRODUTOS
-        secoesFiltrada.set(elem.id_secao, elem)
-    })
-
-    //CONVERTENDO O MAP EM ARRAY
-    const secoesMenu = Array.from(secoesFiltrada.values())
-
-    //RETORNADO O ARRAY CONVERTIDO
-    return secoesMenu
-
-}
-
-//MONTANDO OS LINKS SEÇÕES
-const montarSecoes = () => {
-    //PEGANDO O ELEMENTO DO DOM
-    const ulMenu = document.querySelector('#menu-secoes')
-    //LIMPANDO O ELEMENTO ulMenu
-    ulMenu.innerHTML = ''
-
-    //PERCORRENDO O ARRAY DAS SEÇÕES FILTRADA
-    listarSecoes().forEach((elem, i) => {
-        //CRIANDO O ELEMENTO li
-        const liSecao = document.createElement('li')
-
-        //CRIANDO O ELEMENTO a
-        const aSecao = document.createElement('a')
-        aSecao.setAttribute('href', '#')
-        aSecao.setAttribute('class', 'lnk-secao')
-        aSecao.innerHTML = elem.nome_secao
-
-        //CAPTURANDO O CLICK DOS LINKS
-        aSecao.addEventListener('click', () => {
-            //CHAMANDO A FUNÇÃO PRODUTOS FILTRADOS
-            montandoCards(produtosFiltrados(elem.id_secao))
+        // EVENTO DO BOTÃO ADICIONADO AQUI, NA CRIAÇÃO DO CARD
+        btnCard.addEventListener('click', () => {
+            alert(`${elem.descricao_produto} adicionado ao carrinho!`)
+            console.log('Produto adicionado:', elem)
         })
 
-        //ADICIONANDO O ELEMENTO FILHO a NO ELEMENTO li
-        liSecao.appendChild(aSecao)
-
-        //ADICIONANDO O ELEMENTO FILHO li NO ELEMENTO DO DOM ul
-        ulMenu.appendChild(liSecao)
-    })
-
-}
-
-montarSecoes()
-
-//FILTRANDO PRODUTOS 
-const produtosFiltrados = (idSecao) => {
-    return produtos.filter(elem => elem.id_secao === idSecao)
-}
-
-//MONTANDO CARDS
-const montandoCards = (objProdutos) => {
-    section_cards.innerHTML = ''
-
-    objProdutos.forEach((elem, i) => {
-        const divCard = document.createElement('div')
-        divCard.setAttribute('class', 'card')
-
-        const imgProduto = document.createElement('img')
-        imgProduto.setAttribute('src', elem.caminho_da_imagem)
-        imgProduto.setAttribute('alt', elem.descricao_produto)
-        imgProduto.setAttribute('class', 'img_card')
-
-        const h2Titulo = document.createElement('h2')
-        h2Titulo.innerHTML = elem.descricao_produto
-
-        const h3Valor = document.createElement('h3')
-        h3Valor.setAttribute('class', 'valor_card')
-        h3Valor.innerHTML = `R$ ${parseFloat(elem.valor_unitario).toFixed(2).replace('.', ',')}`
-
-        const btnCard = document.createElement('button')
-        btnCard.setAttribute('class', 'btn_card')
-        btnCard.innerHTML = 'Adicionar'
-
         divCard.appendChild(imgProduto)
         divCard.appendChild(h2Titulo)
         divCard.appendChild(h3Valor)
         divCard.appendChild(btnCard)
 
         section_cards.appendChild(divCard)
-
     })
 }
+
+//INICIALIZANDO A PÁGINA
+montarSecoes()
+montandoCards(produtos)
+
+btnCard.addEventListener('click', () => {
+    // PEGA O CARRINHO QUE JÁ ESTÁ SALVO OU CRIA UM VAZIO
+    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || []
+
+    // VERIFICA SE O PRODUTO JÁ ESTÁ NO CARRINHO
+    const produtoExistente = carrinho.find(item => item.id_produto === elem.id_produto)
+
+    if (produtoExistente) {
+        // SE JÁ EXISTE, AUMENTA A QUANTIDADE
+        produtoExistente.quantidade += 1
+    } else {
+        // SE NÃO EXISTE, ADICIONA COM QUANTIDADE 1
+        carrinho.push({ ...elem, quantidade: 1 })
+    }
+
+    // SALVA O CARRINHO NO NAVEGADOR
+    localStorage.setItem('carrinho', JSON.stringify(carrinho))
+
+    alert(`${elem.descricao_produto} adicionado ao carrinho!`)
+})
