@@ -68,7 +68,7 @@ const montarSecoes = () => {
     })
 }
 
-//FILTRANDO PRODUTOS
+//FILTRANDO PRODUTOS POR SEÇÃO
 const produtosFiltrados = (idSecao) => {
     return produtos.filter(elem => elem.id_secao === idSecao)
 }
@@ -92,6 +92,18 @@ const adicionarAoCarrinho = (produto) => {
     // SALVA O CARRINHO NO NAVEGADOR
     localStorage.setItem('carrinho', JSON.stringify(carrinho))
 }
+
+//FILTRANDO PELO INPUT DE PESQUISA
+//PEGANDO O INPUT NO DOM 
+const inputPesquisa = document.querySelector("#pesquisa")
+
+//CAPTURANDO O EVENTO input
+inputPesquisa.addEventListener('input', (evt) => {
+    //CAPTURANDO O TEXTO DO INPUT E O DEIXANDO-O EM MINÚSCULO NA VARIÁVEL txtInput
+    let txtInput = evt.target.value.toLowerCase()
+
+    montandoCards(produtos.filter(elem => elem.descricao_produto.toLowerCase().includes(txtInput)))
+})
 
 //MONTANDO CARDS
 const montandoCards = (objProdutos) => {
@@ -119,8 +131,6 @@ const montandoCards = (objProdutos) => {
         btnCard.innerHTML = 'Adicionar'
 
         // EVENTO DO BOTÃO: SALVA NO CARRINHO E AVISA O USUÁRIO
-        // (fica aqui dentro do forEach, que é o único lugar onde
-        // "elem" e "btnCard" realmente existem)
         btnCard.addEventListener('click', () => {
             adicionarAoCarrinho(elem)
             alert(`${elem.descricao_produto} adicionado ao carrinho!`)
