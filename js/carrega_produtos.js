@@ -4,7 +4,7 @@ import { produtos } from "./produtos.js";
 //PEGANDO ELEMENTO DO DOM
 const section_cards = document.querySelector('#cards')
 
-//CARREGA 
+//CARREGA
 const carregaProduto = (id_secao) => {
     //AO CHAMAR A FUNÇÃO carregaProduto() DEVE PASSAR O PARÂMETRO. 0(ZERO) CHAMA A FUNÇÃO listarProdutos(), QUALQUER OUTRO VALOR CHAMA A FUNLÇAO produtosFiltrados(id_secao)
     if (id_secao === 0) {
@@ -19,14 +19,9 @@ const carregaProduto = (id_secao) => {
 
 //FUNÇÃO PARA CARREGAR OS PRODUTOS
 const listarProdutos = () => {
-    section_cards.innerHTML = ''
-
-
-
-
+    return produtos
 }
 
-listarProdutos()
 
 //FILTRANDO AS SEÇÕES COM A COLEÇÃO map
 const listarSecoes = () => {
@@ -73,9 +68,29 @@ const montarSecoes = () => {
     })
 }
 
-//FILTRANDO PRODUTOS 
+//FILTRANDO PRODUTOS
 const produtosFiltrados = (idSecao) => {
     return produtos.filter(elem => elem.id_secao === idSecao)
+}
+
+// ADICIONA UM PRODUTO AO CARRINHO SALVO NO NAVEGADOR
+const adicionarAoCarrinho = (produto) => {
+    // PEGA O CARRINHO QUE JÁ ESTÁ SALVO OU CRIA UM VAZIO
+    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || []
+
+    // VERIFICA SE O PRODUTO JÁ ESTÁ NO CARRINHO
+    const produtoExistente = carrinho.find(item => item.id_produto === produto.id_produto)
+
+    if (produtoExistente) {
+        // SE JÁ EXISTE, AUMENTA A QUANTIDADE
+        produtoExistente.quantidade += 1
+    } else {
+        // SE NÃO EXISTE, ADICIONA COM QUANTIDADE 1
+        carrinho.push({ ...produto, quantidade: 1 })
+    }
+
+    // SALVA O CARRINHO NO NAVEGADOR
+    localStorage.setItem('carrinho', JSON.stringify(carrinho))
 }
 
 //MONTANDO CARDS
@@ -103,10 +118,12 @@ const montandoCards = (objProdutos) => {
         btnCard.setAttribute('class', 'btn-card')
         btnCard.innerHTML = 'Adicionar'
 
-        // EVENTO DO BOTÃO ADICIONADO AQUI, NA CRIAÇÃO DO CARD
+        // EVENTO DO BOTÃO: SALVA NO CARRINHO E AVISA O USUÁRIO
+        // (fica aqui dentro do forEach, que é o único lugar onde
+        // "elem" e "btnCard" realmente existem)
         btnCard.addEventListener('click', () => {
+            adicionarAoCarrinho(elem)
             alert(`${elem.descricao_produto} adicionado ao carrinho!`)
-            console.log('Produto adicionado:', elem)
         })
 
         divCard.appendChild(imgProduto)
@@ -115,6 +132,9 @@ const montandoCards = (objProdutos) => {
         divCard.appendChild(btnCard)
 
         section_cards.appendChild(divCard)
-
     })
 }
+
+//INICIALIZANDO A PÁGINA
+montarSecoes()
+montandoCards(produtos)
