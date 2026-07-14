@@ -1,3 +1,6 @@
+localStorage.removeItem("itensSessao");
+localStorage.clear()
+
 //CRIANDO O ARRAY DE ITENS DO CARRINHO
 const itensCarrinho = JSON.parse(localStorage.getItem('itensSessao')) || []
 

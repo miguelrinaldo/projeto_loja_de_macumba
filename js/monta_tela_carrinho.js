@@ -5,6 +5,8 @@ const montaTelaCarrinho = () => {
     //PEGANDO ELEMENTOS DO DOM
     const sectionItensCarrinho = document.querySelector('#itens-carrinho')
 
+    sectionItensCarrinho.innerHTML = ''
+
     listItens().forEach((elem, i) => {
         const sectionItem = document.createElement('section')
         sectionItem.setAttribute('class', 'item')
