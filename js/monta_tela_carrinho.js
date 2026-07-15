@@ -13,7 +13,7 @@ const montaTelaCarrinho = () => {
         sectionItem.innerHTML = `<img src='${elem.caminho_da_imagem}' alt=${elem.descricao_produto}/> 
         <p class='descricao'>${elem.descricao_produto}</p> 
         <p class='vlr-unitario'>${elem.valor_unitario}</p> 
-        <input type="number" name='quant${i}' id='quant${i}' class="input-item" value=${1}> 
+        <input type="number" name='quant${i}' id='quant${i}' class="input-item" value=${elem.quantidade}> 
         <p class="tot-item">${elem.valor_unitario * 1}</p>
         <img src="../imagens/icones/remover.png" alt="" class="img-remover">`
 
@@ -22,22 +22,22 @@ const montaTelaCarrinho = () => {
         imgRemover.setAttribute('alt', 'Remover')
         imgRemover.setAttribute('class', 'img-remover')
 
-        imgRemover.addEventListener('click',()=>{
-         if(confirm(`Deseja remover ${elem.descricao_produto} da sua lista?`)){
-            removerItemCarrinho(i)
-         }
+        imgRemover.addEventListener('click', () => {
+            if (confirm(`Deseja remover ${elem.descricao_produto} da sua lista?`)) {
+                removerItemCarrinho(i)
+            }
         })
-        
 
-       
+        sectionItem.appendChild(imgRemover)
+
+        sectionItensCarrinho.appendChild(sectionItem)
+
     });
-    sectionItem.appendChild(imgRemover)
 
-    sectionItensCarrinho.appendChild(sectionItem)
 
 }
 
-const removerItemCarrinho = (pos)=>{
+const removerItemCarrinho = (pos) => {
     removeItem(pos)
 
     montaTelaCarrinho()

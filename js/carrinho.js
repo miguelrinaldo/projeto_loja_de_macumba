@@ -6,10 +6,20 @@ const itensCarrinho = JSON.parse(localStorage.getItem('itensSessao')) || []
 
 //const itensCarrinho = JSON.parse(sessionStorage.getItem('itensSessao')) || []
 
+//CRIANDO ARROW ITEM
+const fobjItem = (objProduto) => {
+    const item = {
+        id_produto: objProduto.id_descricao_produto, caminho_da_imagem: objProduto.caminho_da_imagem, 
+        valor_unitario: objProduto.valor_unitario, quantidade : 1
+    }
+
+    return item
+}
+
 
 //FUNÇÃO PARA ADCIONAR O ITEM NO ARRAY
 const addItem = (objItem) => {
-    itensCarrinho.push(objItem)
+    itensCarrinho.push(fobjItem(objItem))
 
     localStorage.setItem('itensSessao', JSON.stringify(itensCarrinho))
     //sessionStorage.setItem('itensSessao', JSON.stringify(itensCarrinho))
@@ -25,6 +35,10 @@ const listItens = () => {
     return itensSelecionados
 }
 
+//PEGANDO O INDICE DO ARRAY
+console.log(itensCarrinho.findIndex(elem => elem.id_produto == 2))
+
+
 //REMOVER ELEMENTO
 const removeItem = (pos)=>{
     itensCarrinho.splice(pos, 1)
@@ -34,4 +48,4 @@ const removeItem = (pos)=>{
 }
 
 
-export { addItem, listItens, removeItem}
+export { addItem, listItens, removeItem }
