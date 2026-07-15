@@ -146,7 +146,7 @@ const montandoCards = (objProdutos) => {
             addItem(elem)
             
             //REDIRECIONA PARA PÁGINA carrinho.html
-            window.location.href = "/pagina/carrinho.html"
+            window.location.href = "./paginas/carrinho.html"
         })
 
         divCard.appendChild(imgProduto)
