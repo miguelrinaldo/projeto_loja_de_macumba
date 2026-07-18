@@ -1,79 +1,76 @@
 //PEGANDO O INPUT CEP DO DOM
 const inputCep = document.querySelector('#cep')
 
-
 //CAPTURANDO O EVENTO AO PERDER O FOCO
-inputCep.addEventListener('change', (evt) =>{
-const numCep = evt.targer.value.replace(/\D/g,'')
+inputCep.addEventListener('change', (evt) => {
+    //PEGANDO OS NÚMEROS DO INPUT NÃO PERMITINDO OUTRO TIPO DE DADOS QUE NÃO SEJA DÍGITO
+    const numCep = evt.target.value.replace(/\D/g, '')
 
-   if (numCep != 8){
-    alert('CEP INVÁLIDO !!!')
-    return
+    //VERIFIVA SE SÃO 8(OITO) DÍGITOS
+    if (numCep.length != 8){
+        alert('CEP INVÁLIDO !!!')
+        return
+    }
 
-   }
-
-   
-
+    //CHAMA A FUNÇÃO buscaDadosCep
+    buscaDadosCep(numCep)
 })
 
-//BUSCAR OS DADOS DO CEP NO VIACEP
-const buscarDados = async (cep) =>{
-    //TENTA BUSCAS OS DADOS NO VIA CEP
+//BUSCAR OS DADOS DOS CEP NO VIACEP 
+const buscaDadosCep = async (cep) =>{
+    //TENTA BUSCAS OS DADOS NO VIACEP
     try{
 
-        //https://viacep.com.br/ws/01001000/json/
-
-        //https://viacep.com.br/ws/01001000/json/
-
-    
-     
-        //BUSCAR OS DADOS NO VIA CEP
-        const reponse = await fetch(`https://viacep.com.br/ws/01001000/json/`)
+        //BUSCA DADOS VIA CEP
+        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`)
 
         //CONVERTE OS DADOS NO FORMATO json
-        const dadosEndereco = response.json
+        const dadosEndereco = await response.json()
+        console.log(dadosEndereco)
 
         //CHAMA A FUNÇÃO exibeDados
         exibeDados(dadosEndereco)
 
-        //CASO HAJA ALGUM ERRO É CAPTURADO PELO catch
+        //CASO HAJA ALGUM ERRO É CAPTURADOS PELO  catch
     }catch(erro){
-        console.log('ERRO APRESENTADO', erro.message)
+        console.log('ERRO APRENSENTADO',erro.message)
     }
 }
 
-//OBJETO LITERAL CAMPOS QUE CRIA CADA CHAVE QUE SEJA UM UNPUT DO DOM
+//OBJETO LITERAL CAMPOS QUE CRIA CADA CHAVE SEJA UM INPUT DO DOM
 const campos = {
     logradouro: document.querySelector('#logradouro'),
-    bairro: document.querySelector('#bairro'),
-    localidade: document.querySelector('#localidade'),
-    uf: document.querySelector('#uf'),
-
-}
+    bairro : document.querySelector ('#bairro'),
+    localidade: document.querySelector ('#localidade'),
+    uf : document.querySelector ('#uf')
+}   
 
 //FUNÇÃO EXIBE DADOS
 const exibeDados = (objDados) => {
-    //PEGA A DIV PAI DOS ELEMEMTOS DO ENDEREÇO
+    //PEGA A DIV PAI DOS ELEMENTOS DO ENDEREÇO
     const divEndereco = document.querySelector('#div-dados-endereco')
 
-    //REMOVE A DIV
+    //REMOVE A DIV O CLASS OCULTO 
     divEndereco.classList.remove('oculto')
 
+   //PECORRE O  OBJETO, NO FORMATO JSON, DO VIDA CEP
     for (let chave in campos){
-        
-    //ATRIBUIR O VAlor AO INPUT
-    campos[chave].value = objDados [chave]
 
-    //BLOQUEIA OS INPUTS. NÃO PERMITE QUE O USUARIO APAGUE OS VALORES 
-    campos[chave].disabled = objDados[chave]
+      //ATRIBUI O VALOR AO INPUT
+      campos[chave].value= objDados[chave]
+
+      //BLOQUEIA OS INPUTS. NÃO PERMITE QUE O USUARIO APAGUE OS VALORES
+      campos[chave].disabled = objDados[chave]
    }
+
    document.querySelector('#num-residencia').focus()
-
 }
+ //PEGANDO O FORMULARIO DO DOM
+const formPessoa = document.querySelector('#form-pessoa')
 
-formPessoa.addEventListener('reset', () =>{
+formPessoa.addEventListener('reset', () => {
     //PEGA A DIV PAI DOS ELEMENTOS DO ENDEREÇO
-    const divEndereco = document.querySelector('#div-dados-enedereco')
-    //REMOVE DA DIV A CLASS OCULTO
+    const divEndereco = document.querySelector('#div-dados-endereco')
+    //REMOVE  DA DIV A CLASS OCULTO
     divEndereco.classList.add('oculto')
 })

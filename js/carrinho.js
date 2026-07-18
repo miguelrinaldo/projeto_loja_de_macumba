@@ -7,44 +7,36 @@ const itensCarrinho = JSON.parse(localStorage.getItem('itensSessao')) || []
 //const itensCarrinho = JSON.parse(sessionStorage.getItem('itensSessao')) || []
 
 //CRIANDO ARROW ITEM
-const fobjItem = (objProduto) => {
-    const item = {
-        id_produto: objProduto.id_descricao_produto, 
+const fObjItem = (objProduto) => {
+    const item ={
+        id_produto: objProduto.id_produto,
         descricao_produto: objProduto.descricao_produto,
         caminho_da_imagem: objProduto.caminho_da_imagem,
-        valor_unitario: objProduto.valor_unitario, 
-        quantidade: 1,
-        
+        valor_unitario: objProduto.valor_unitario,
+        quantidade : 1
     }
 
     return item
 }
 
+//PEGANDO O INDICE DO ARRAY (CORRIGIDO: findIndex, não findIdex)
+console.log("indice do array ->>> ", itensCarrinho.findIndex(elem => elem.id_produto == 2))
 
-
-
-//FUNÇÃO PARA ADCIONAR O ITEM NO ARRAY
-console.log("indice do array ->>>", itensCarrinho.findIndex(elem => elem.id_produto == 2))
+//FUNÇÃO PARA ADCIONAR O ITEM NO ARRAY (AGORA SOMA QUANTIDADE SE JÁ EXISTIR)
 const addItem = (objItem) => {
-    // 1) Procura se o produto já está no carrinho
-    const indiceExistente = itensCarrinho.findIndex(
-        elem => elem.id_produto === objItem.id_produto
-    )
+    const indice = itensCarrinho.findIndex(elem => elem.id_produto === objItem.id_produto)
 
-    if (indiceExistente !== -1) {
-        // 2) Já existe -> só incrementa a quantidade
-        itensCarrinho[indiceExistente].quantidade += 1
+    if (indice === -1) {
+        //PRODUTO NOVO NO CARRINHO
+        itensCarrinho.push(fObjItem(objItem))
     } else {
-        // 3) Não existe -> cria um item novo
-        itensCarrinho.push(fobjItem(objItem))
+        //PRODUTO JÁ EXISTE, SÓ SOMA 1 NA QUANTIDADE
+        itensCarrinho[indice].quantidade += 1
     }
-   
 
     localStorage.setItem('itensSessao', JSON.stringify(itensCarrinho))
     //sessionStorage.setItem('itensSessao', JSON.stringify(itensCarrinho))
 }
-
-
 
 //LISTAR ITENS DO CARRINHO
 const listItens = () => {
@@ -56,13 +48,8 @@ const listItens = () => {
     return itensSelecionados
 }
 
-//PEGANDO O INDICE DO ARRAY
-
-console.log(itensCarrinho.findIndex(elem => elem.id_produto == 2))
-
-
-//REMOVER ELEMENTO
-const removeItem = (pos) => {
+//REMOVER ELEMENTO  
+const removeriItem = (pos) =>{
     itensCarrinho.splice(pos, 1)
 
     localStorage.setItem('itensSessao', JSON.stringify(itensCarrinho))
@@ -70,4 +57,4 @@ const removeItem = (pos) => {
 }
 
 
-export { addItem, listItens, removeItem }
+export { addItem, listItens, removeriItem }
