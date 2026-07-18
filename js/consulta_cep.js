@@ -1,6 +1,7 @@
 //PEGANDO O INPUT CEP DO DOM
 const inputCep = document.querySelector('#cep')
 
+
 //CAPTURANDO O EVENTO AO PERDER O FOCO
 inputCep.addEventListener('change', (evt) =>{
 const numCep = evt.targer.value.replace(/\D/g,'')
@@ -58,17 +59,21 @@ const exibeDados = (objDados) => {
     //REMOVE A DIV
     divEndereco.classList.remove('oculto')
 
-    document.querySelector('#logradouro').value = objDados.logradouro,
-    document.querySelector('#bairro').value = objDados.bairro,
-    document.querySelector('#localidade').value = objDados.localidade,
-    document.querySelector('#uf').value = objDados.uf
-
-
-
-    for (let chave in objDados)
+    for (let chave in campos){
+        
     //ATRIBUIR O VAlor AO INPUT
-    campos[chave] = objDados 
+    campos[chave].value = objDados [chave]
 
     //BLOQUEIA OS INPUTS. NÃO PERMITE QUE O USUARIO APAGUE OS VALORES 
     campos[chave].disabled = objDados[chave]
+   }
+   document.querySelector('#num-residencia').focus()
+
 }
+
+formPessoa.addEventListener('reset', () =>{
+    //PEGA A DIV PAI DOS ELEMENTOS DO ENDEREÇO
+    const divEndereco = document.querySelector('#div-dados-enedereco')
+    //REMOVE DA DIV A CLASS OCULTO
+    divEndereco.classList.add('oculto')
+})
