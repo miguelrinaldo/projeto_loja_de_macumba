@@ -9,37 +9,41 @@ const itensCarrinho = JSON.parse(localStorage.getItem('itensSessao')) || []
 //CRIANDO ARROW ITEM
 const fobjItem = (objProduto) => {
     const item = {
-        id_produto: objProduto.id_descricao_produto,
+        id_produto: objProduto.id_descricao_produto, 
+        descricao_produto: objProduto.descricao_produto,
         caminho_da_imagem: objProduto.caminho_da_imagem,
-        valor_unitario: objProduto.valor_unitario,
+        valor_unitario: objProduto.valor_unitario, 
         quantidade: 1,
-        valor_total: objProduto.valor_unitario * 1
+        
     }
 
     return item
 }
 
 
-//FUNÇÃO PARA ADCIONAR O ITEM NO ARRAY (SEM DUPLICAR, PRODUTO DIFERENTE ENTRA SEPARADO)
+
+
+//FUNÇÃO PARA ADCIONAR O ITEM NO ARRAY
+console.log("indice do array ->>>", itensCarrinho.findIndex(elem => elem.id_produto == 2))
 const addItem = (objItem) => {
+    // 1) Procura se o produto já está no carrinho
+    const indiceExistente = itensCarrinho.findIndex(
+        elem => elem.id_produto === objItem.id_produto
+    )
 
-    const indice = itensCarrinho.findIndex(elem => elem.id_produto === objItem.id_descricao_produto)
-
-    if (indice == -1) {
-        // Produto NÃO existe no carrinho -> entra como item NOVO e separado
-        itensCarrinho.push(fobjItem(objItem))
+    if (indiceExistente !== -1) {
+        // 2) Já existe -> só incrementa a quantidade
+        itensCarrinho[indiceExistente].quantidade += 1
     } else {
-        // Produto JÁ existe -> não duplica, só soma quantidade e valor
-        itensCarrinho[indice].quantidade += 1
-        itensCarrinho[indice].valor_total =
-            itensCarrinho[indice].valor_unitario * itensCarrinho[indice].quantidade
+        // 3) Não existe -> cria um item novo
+        itensCarrinho.push(fobjItem(objItem))
     }
+   
 
     localStorage.setItem('itensSessao', JSON.stringify(itensCarrinho))
     //sessionStorage.setItem('itensSessao', JSON.stringify(itensCarrinho))
-
-    return calcularTotalCarrinho()
 }
+
 
 
 //LISTAR ITENS DO CARRINHO
@@ -52,6 +56,10 @@ const listItens = () => {
     return itensSelecionados
 }
 
+//PEGANDO O INDICE DO ARRAY
+
+console.log(itensCarrinho.findIndex(elem => elem.id_produto == 2))
+
 
 //REMOVER ELEMENTO
 const removeItem = (pos) => {
@@ -59,21 +67,7 @@ const removeItem = (pos) => {
 
     localStorage.setItem('itensSessao', JSON.stringify(itensCarrinho))
     //sessionStorage.setItem('itensSessao', JSON.stringify(itensCarrinho))
-
-    return calcularTotalCarrinho()
 }
 
 
-//CALCULAR O VALOR TOTAL DE TODOS OS PRODUTOS DO CARRINHO
-const calcularTotalCarrinho = () => {
-    let total = 0
-
-    for (const item of itensCarrinho) {
-        total += item.valor_unitario * item.quantidade
-    }
-
-    return total
-}
-
-
-export { addItem, listItens, removeItem, calcularTotalCarrinho }
+export { addItem, listItens, removeItem }
